@@ -1,10 +1,53 @@
-<h1>BURGERS!</h1>
+<div class="container">
+  <div class="center" class="liist">
+    <h2>Burgers:</h2>
+    <ul class="list-group" style="align-content: center;
+	align-content: center; ">
+      <ul>
+        {{#each burgers}}
+        {{#unless this.devoured}}
+        <li class="list-group-item list-group-item">
+          {{this.burger_name}}
+          <form action="/{{this.id}}?_method=PUT" method="POST">
+            <input type="hidden" name="devoured" value="true">
+            <button type="submit" class="btn btn-outline-warning">Devour it!</button>
+          </form>
+        </li>
+        {{/unless}}
+        {{/each}}
+      </ul>
+  </div>
+</div>
 
-<h2>burgers for everyone!!</h2>
+<div class="container">
+  <div class="centered" class="list">
+    <h2>Devoured Burgers:</h2>
+    <ul class="list-group">
+      {{#each burgers}}
+      {{#if this.devoured}}
+      <li class="list-group-item list-group-item-danger">
+        {{this.burger_name}}
+        <form action="/{{this.id}}?_method=PUT" method="POST">
+          <input type="hidden" name="devoured" value="false">
+        </form>
+      </li>
+      {{/if}}
+      {{/each}}
+    </ul>
+  </div>
+</div>
 
-<ul>
-  {{#each burger}}
-  {{/each}}
-</ul>
-
-<button type="submit">Add burger</button>
+<div class="container">
+  <div class="centered" class="list">
+    <h2>Make Your Own Burgers!!</h2>
+    <form class="create-update-form" action="/" method="POST">
+      <div class="form-group">
+        <label for="burger">Burger Name:</label>
+        <br>
+        <input type="text" id="burger" class="user-burgername" name="name" aria-label="Username"
+          aria-describedby="basic-addon1">
+      </div>
+      <button type="submit" class="btn btn-warning">Add Burger</button>
+    </form>
+  </div>
+</div>
